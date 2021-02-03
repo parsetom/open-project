@@ -1,0 +1,19 @@
+html {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  height: inherit;
+  width: inherit;
+  background-color: #f8f8f8;
+}
+
+.maximize {
+  height: inherit;
+  width: inherit;
+}
+
+#app {
+  height: inherit;
+}
