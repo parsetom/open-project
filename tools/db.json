@@ -1,1 +1,11 @@
-{"projects":[]}
+{
+  "projects": [
+    {
+      "id": 1,
+      "shortDesc": "Test Project",
+      "longDesc": "Test Description",
+      "exposures": [],
+      "createdAt": 1612461279454
+    }
+  ]
+}

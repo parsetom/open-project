@@ -29,6 +29,7 @@ class App extends React.Component {
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route path="/background" component={BackgroundPage} />
+          <Route path="/background/:id" component={BackgroundPage} />
           <Route path="/ocr-app" component={OcrAppPage} />
           <Route path="/open-projects" component={OpenProjectsPage} />
           <Route component={NotFoundPage} />

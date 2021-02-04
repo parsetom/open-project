@@ -4,6 +4,7 @@ import { loadProjects, saveProject } from '../../actions/projectActions';
 import PropTypes from 'prop-types';
 import ProjectForm from './ProjectForm';
 import { newProject } from '../../../tools/mockData';
+import { getSlug } from '../../utils/stringUtil';
 
 function ManageProjectComponent({
   loadProjects,
@@ -11,8 +12,8 @@ function ManageProjectComponent({
   data,
   ...props // rest operator. this allows you to import all props that hasn't been referenced yet.
 }) {
-  const [project, setProject] = useState({ ...props.project }); // This syntax creates a reference on object and the setter method
-  const [errors, setErrors] = useState({}); // Defaulting the errors to an empty array
+  const [project, setProject] = useState({ ...props.project }); // This syntax creates a reference on props object and the setter method
+  const [errors, setErrors] = useState({}); // Defaulting the errors to an empty object
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
@@ -22,8 +23,7 @@ function ManageProjectComponent({
     } else {
       setProject({ ...props.project });
     }
-  }, [props.project]); // This array parameters are a set of dependencies that
-  // upon change useEffect callback triggers
+  }, [props.project]); // This array parameters are a set of dependencies that upon change useEffect callback triggers
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -55,7 +55,6 @@ function ManageProjectComponent({
     setSaving(true);
     saveProject(project)
       .then(() => {
-        // history.push('/projects');
         setSaving(false);
       })
       .catch((error) => {
@@ -83,15 +82,16 @@ ManageProjectComponent.propTypes = {
   saveProject: PropTypes.func.isRequired,
 };
 
-export function getProjectBySlug(projects, slug) {
-  return projects.find((project) => project.slug === slug) || null;
+function getProjectById(projects, id) {
+  return projects.find((p) => p.id == id) || null;
 }
 
 function mapStateToProps(state) {
-  const slug = null;
+  const path = state.router.location.pathname;
+  const id = getSlug(path);
   const project =
-    slug && state.projects.length > 0
-      ? getProjectBySlug(state.projects, slug)
+    id && state.projects.length > 0
+      ? getProjectById(state.projects, id)
       : { ...newProject };
 
   return {

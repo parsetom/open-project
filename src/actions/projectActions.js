@@ -1,8 +1,5 @@
 import * as types from './actionTypes';
 import * as projectApi from '../api/projectApi';
-export function createProject(project) {
-  return { type: types.CREATE_PROJECT, project: project };
-}
 
 export function loadProjectsSuccess(projects) {
   return { type: types.LOAD_PROJECTS_SUCCESS, projects };
