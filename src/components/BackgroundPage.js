@@ -15,11 +15,13 @@ function BackgroundPage({ projects, data, ...props }) {
   return (
     <div className="maximize">
       <h1>Background</h1>
-      <div className="col-md-3">
-        <ProjectsComponent />
-      </div>
-      <div className="col-md-3">
-        <ProjectsTimeline projects={projects} />
+      <div className="row">
+        <div className="col-md-3">
+          <ProjectsComponent />
+        </div>
+        <div className="col-md-3">
+          <ProjectsTimeline projects={projects} />
+        </div>
       </div>
     </div>
   );

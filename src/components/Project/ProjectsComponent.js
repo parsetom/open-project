@@ -15,6 +15,7 @@ function ManageProjectComponent({
   const [project, setProject] = useState({ ...props.project }); // This syntax creates a reference on props object and the setter method
   const [errors, setErrors] = useState({}); // Defaulting the errors to an empty object
   const [saving, setSaving] = useState(false);
+  const [isCurrent, setIsCurrent] = useState(false);
 
   useEffect(() => {
     var { projectsData } = data;
@@ -25,14 +26,34 @@ function ManageProjectComponent({
     }
   }, [props.project]); // This array parameters are a set of dependencies that upon change useEffect callback triggers
 
-  function handleChange(event) {
-    const { name, value } = event.target;
-
+  function handleStartDateChange(date) {
     setProject((prevProject) => ({
       ...prevProject,
-      [name]: value, // Let's assign the new value to the property.
+      startDate: date,
     }));
-    // The [name] syntax allows you to reference a property as a variable.
+  }
+
+  function handleEndDateChange(date) {
+    setProject((prevProject) => ({
+      ...prevProject,
+      endDate: date,
+    }));
+  }
+
+  function handleChange(event) {
+    const { name } = event.target;
+
+    if (name == 'isCurrent') {
+      const { checked } = event.target;
+      setIsCurrent(checked);
+    } else {
+      const { value } = event.target;
+      setProject((prevProject) => ({
+        ...prevProject,
+        [name]: value, // Let's assign the new value to the property.
+      }));
+      // The [name] syntax allows you to reference a property as a variable.
+    }
   }
 
   function formIsValid() {
@@ -68,8 +89,11 @@ function ManageProjectComponent({
       project={project}
       errors={errors}
       onChange={handleChange}
+      onStartDateChange={handleStartDateChange}
+      onEndDateChange={handleEndDateChange}
       onSave={handleSave}
       saving={saving}
+      isCurrent={isCurrent}
     />
   );
 }

@@ -63,3 +63,12 @@ server.listen(port, () => {
 });
 
 // Centralized logic
+
+// Cleanup resources on unexpected closes
+process.on('uncaughtException', function () {
+  server.close();
+});
+
+process.on('SIGTERM', function () {
+  server.close();
+});

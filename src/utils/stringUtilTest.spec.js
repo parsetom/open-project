@@ -9,5 +9,5 @@ it('should get the slug', () => {
 
 it('should not process slug if url is empty', () => {
   expect(getSlug('')).toEqual('');
-  expect(getSlug(null)).toEqual('');
+  expect(getSlug(null)).toEqual(null);
 });
