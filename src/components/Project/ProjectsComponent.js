@@ -16,9 +16,10 @@ function ManageProjectComponent({
   const [errors, setErrors] = useState({}); // Defaulting the errors to an empty object
   const [saving, setSaving] = useState(false);
   const [isCurrent, setIsCurrent] = useState(false);
+  const [exposure, setExposure] = useState('');
 
   useEffect(() => {
-    var { projectsData } = data;
+    let { projectsData } = data;
     if (!projectsData.hasLoaded) {
       loadProjects();
     } else {
@@ -46,6 +47,9 @@ function ManageProjectComponent({
     if (name == 'isCurrent') {
       const { checked } = event.target;
       setIsCurrent(checked);
+    } else if (name == 'exposure') {
+      const { value } = event.target;
+      setExposure(value);
     } else {
       const { value } = event.target;
       setProject((prevProject) => ({
@@ -92,6 +96,7 @@ function ManageProjectComponent({
       onStartDateChange={handleStartDateChange}
       onEndDateChange={handleEndDateChange}
       onSave={handleSave}
+      exposure={exposure}
       saving={saving}
       isCurrent={isCurrent}
     />
@@ -112,7 +117,12 @@ function getProjectById(projects, id) {
 
 function mapStateToProps(state) {
   const path = state.router.location.pathname;
-  const id = getSlug(path);
+  let id = getSlug(path);
+
+  if (isNaN(id)) {
+    // If slug is non numeric we would rather send a new project
+    id = null;
+  }
   const project =
     id && state.projects.length > 0
       ? getProjectById(state.projects, id)

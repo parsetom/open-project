@@ -9,6 +9,7 @@ const ProjectForm = ({
   onStartDateChange,
   onEndDateChange,
   onSave,
+  exposure,
   saving,
   isCurrent,
   errors = {},
@@ -48,7 +49,7 @@ const ProjectForm = ({
           />
         </div>
         <div className="col-md-6">
-          Until or Current?{' '}
+          Until or Present?{' '}
           <input
             type="checkbox"
             name="isCurrent"
@@ -66,6 +67,14 @@ const ProjectForm = ({
         </div>
       </div>
       <br />
+      <TextInput
+        name="exposure"
+        label="Add Exposure"
+        value={exposure}
+        onChange={onChange}
+        maxLength={50}
+      ></TextInput>
+      <br />
       <button type="submit" disabled={saving} className="btn btn-primary">
         {saving ? 'Saving...' : 'Save'}
       </button>
@@ -80,6 +89,7 @@ ProjectForm.propTypes = {
   onChange: PropTypes.func.isRequired,
   onStartDateChange: PropTypes.func.isRequired,
   onEndDateChange: PropTypes.func.isRequired,
+  exposure: PropTypes.string.isRequired,
   saving: PropTypes.bool.isRequired,
   isCurrent: PropTypes.bool.isRequired,
 };

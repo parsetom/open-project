@@ -14,7 +14,7 @@ function BackgroundPage({ projects, data, ...props }) {
   }, [props.projects]);
   return (
     <div className="maximize">
-      <h1>Background</h1>
+      <h1>Work Background</h1>
       <div className="row">
         <div className="col-md-3">
           <ProjectsComponent />

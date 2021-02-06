@@ -49,6 +49,9 @@ server.post('/projects/', function (req, res, next) {
   if (error) {
     res.status(400).send(error);
   } else {
+    var project = req.body;
+    project.startDate = Date.parse(project.startDate);
+    project.endDate = Date.parse(project.endDate);
     next();
   }
 });

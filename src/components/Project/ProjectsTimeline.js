@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import { toDateString } from '../../utils/dateUtil';
 const ProjectsTimeline = ({ projects }) => {
   return (
     <div>
@@ -11,7 +11,9 @@ const ProjectsTimeline = ({ projects }) => {
             <br />
             <label>Description:</label> {project.longDesc}
             <br />
-            <label>Project Date:</label> {project.createdDate}
+            <label>From:</label> {toDateString(project.startDate)} {' - '}
+            <label>{project.endDate == null ? 'Present' : 'Until:'}</label>
+            {project.endDate && ' ' + toDateString(project.endDate)}
           </div>
         );
       })}
