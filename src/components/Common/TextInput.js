@@ -5,10 +5,12 @@ const TextInput = ({
   name,
   label,
   onChange,
+  onKeyPress,
   placeholder,
   value,
   error,
   maxLength,
+  disabled,
 }) => {
   let wrapperClass = 'form-group';
   if (error && error.length > 0) {
@@ -26,7 +28,9 @@ const TextInput = ({
           placeholder={placeholder}
           value={value}
           onChange={onChange}
+          onKeyPress={onKeyPress}
           maxLength={maxLength}
+          disabled={disabled}
         />
         {error && <div className="alert alert-danger">{error}</div>}
       </div>
@@ -37,11 +41,13 @@ const TextInput = ({
 TextInput.propTypes = {
   name: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
+  onKeyPress: PropTypes.func,
   onChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
   value: PropTypes.string,
   error: PropTypes.string,
   maxLength: PropTypes.number,
+  disabled: PropTypes.disabled,
 };
 
 export default TextInput;

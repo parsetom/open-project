@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { loadProjects, saveProject } from '../../actions/projectActions';
+import { push as pushToHistory } from 'connected-react-router';
 import PropTypes from 'prop-types';
 import ProjectForm from './ProjectForm';
 import { newProject } from '../../../tools/mockData';
@@ -28,6 +29,11 @@ function ManageProjectComponent({
   }, [props.project]); // This array parameters are a set of dependencies that upon change useEffect callback triggers
 
   function handleStartDateChange(date) {
+    if (date) {
+      let currentErrors = { ...errors };
+      currentErrors.startDate = null;
+      setErrors(currentErrors);
+    }
     setProject((prevProject) => ({
       ...prevProject,
       startDate: date,
@@ -35,10 +41,41 @@ function ManageProjectComponent({
   }
 
   function handleEndDateChange(date) {
+    if (date) {
+      let currentErrors = { ...errors };
+      currentErrors.endDate = null;
+      setErrors(currentErrors);
+    }
     setProject((prevProject) => ({
       ...prevProject,
       endDate: date,
     }));
+  }
+
+  function handleAddExposure(event) {
+    if (event.charCode == 13 && event.key == 'Enter') {
+      let existingExposure = project.exposures.find((exp) => {
+        return exp.toLowerCase() == exposure.toLowerCase();
+      });
+
+      if (!existingExposure) {
+        project.exposures.push(exposure);
+      }
+      setExposure('');
+      event.preventDefault();
+    }
+  }
+
+  function handleRemoveExposure(event) {
+    let { name } = event.target;
+    let filteredExposures = project.exposures.filter((exposure) => {
+      return exposure != name;
+    });
+    setProject((prevProject) => ({
+      ...prevProject,
+      exposures: filteredExposures,
+    }));
+    event.preventDefault();
   }
 
   function handleChange(event) {
@@ -47,6 +84,13 @@ function ManageProjectComponent({
     if (name == 'isCurrent') {
       const { checked } = event.target;
       setIsCurrent(checked);
+
+      if (checked) {
+        // We don't need errors for end date if project is current.
+        let currentErrors = { ...errors };
+        currentErrors.endDate = null;
+        setErrors(currentErrors);
+      }
     } else if (name == 'exposure') {
       const { value } = event.target;
       setExposure(value);
@@ -61,11 +105,23 @@ function ManageProjectComponent({
   }
 
   function formIsValid() {
-    const { shortDesc, longDesc } = project;
+    const { shortDesc, longDesc, startDate, endDate } = project;
     const errors = {};
 
     if (!shortDesc) errors.shortDesc = 'Project name is required.';
     if (!longDesc) errors.longDesc = 'Project description is required.';
+
+    if (!startDate) {
+      errors.startDate = 'Start date is required.';
+    }
+
+    if (!isCurrent && !endDate) {
+      errors.endDate = 'End date is required if not current.';
+    }
+
+    if (project.exposures.length == 0) {
+      errors.exposures = 'Add atleast 1 exposure.';
+    }
 
     setErrors(errors);
     return Object.keys(errors).length === 0;
@@ -80,7 +136,7 @@ function ManageProjectComponent({
     setSaving(true);
     saveProject(project)
       .then(() => {
-        setSaving(false);
+        props.pushToHistory('/background/' + project.id);
       })
       .catch((error) => {
         setSaving(false);
@@ -96,6 +152,8 @@ function ManageProjectComponent({
       onStartDateChange={handleStartDateChange}
       onEndDateChange={handleEndDateChange}
       onSave={handleSave}
+      onAddExposure={handleAddExposure}
+      onRemoveExposure={handleRemoveExposure}
       exposure={exposure}
       saving={saving}
       isCurrent={isCurrent}
@@ -109,6 +167,7 @@ ManageProjectComponent.propTypes = {
   project: PropTypes.object.isRequired,
   loadProjects: PropTypes.func.isRequired,
   saveProject: PropTypes.func.isRequired,
+  pushToHistory: PropTypes.func.isRequired,
 };
 
 function getProjectById(projects, id) {
@@ -138,6 +197,7 @@ function mapStateToProps(state) {
 const mapDispatchToProps = {
   loadProjects,
   saveProject,
+  pushToHistory,
 };
 
 export default connect(

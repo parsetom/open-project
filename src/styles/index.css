@@ -17,3 +17,23 @@ body {
 #app {
   height: inherit;
 }
+
+.badge {
+  margin-left: 2px;
+}
+
+.badge button {
+  background-color: inherit;
+  border-color: transparent;
+  box-shadow: none;
+  color: inherit;
+}
+
+.add-project-container {
+  display: inline-block;
+}
+
+.project-timeline-container {
+  display: inline-block;
+  vertical-align: top;
+}
