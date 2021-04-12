@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31129.286
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomePort.Test.Services", "HomePort.Test.Services\HomePort.Test.Services.csproj", "{99E56A90-0941-489A-B149-A077F8F008EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomePort.Identity.Service", "HomePort.Identity.Service\HomePort.Identity.Service.csproj", "{A3395ABE-89D6-4D79-9182-17B7B27B449F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{99E56A90-0941-489A-B149-A077F8F008EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99E56A90-0941-489A-B149-A077F8F008EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99E56A90-0941-489A-B149-A077F8F008EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99E56A90-0941-489A-B149-A077F8F008EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3395ABE-89D6-4D79-9182-17B7B27B449F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3395ABE-89D6-4D79-9182-17B7B27B449F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3395ABE-89D6-4D79-9182-17B7B27B449F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3395ABE-89D6-4D79-9182-17B7B27B449F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D01D9188-5009-4193-94C3-BCE69691E5BC}
+	EndGlobalSection
+EndGlobal
