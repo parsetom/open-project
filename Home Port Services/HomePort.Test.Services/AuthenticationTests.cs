@@ -21,9 +21,10 @@ namespace HomePort.Test.Services
             request.Content = new FormUrlEncodedContent(new Dictionary<string, string>
             {
                 ["grant_type"] = "password",
-                ["username"] = "joseph.abel.delacruz@outlook.com",
-                ["password"] = "ZHUv_Vb6:xCHzcu"
+                ["username"] = "test@yopmail.com",
+                ["password"] = "Pa$$w0rd"
             });
+            request.Headers.Add("Host", "localhost");
 
             var response = await client.SendAsync(request, HttpCompletionOption.ResponseContentRead);
             

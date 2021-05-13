@@ -19,11 +19,10 @@ namespace HomePort.Test.Services
             var registration = new RegisterModel
             {
                 Email = "test@yopmail.com",
-                Password = "pa$$w0rd"
+                Password = "Pa$$w0rd"
             };
 
             var content = TestHelpers.GetStringContent(registration);
-            var test = await client.GetAsync("/api/accounts");
             var result = await client.PostAsync("/api/accounts", content);
             
         }

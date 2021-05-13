@@ -20,7 +20,7 @@ namespace HomePort.Test.Services
     [SetUpFixture]
     public class TestHelpers
     {
-        private const string TestUrl = "http://localhost:44331/";
+        private const string TestUrl = "https://localhost:44369/";
         private static TestServer _server;
         private static HttpClient _client;
 
