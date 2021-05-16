@@ -26,8 +26,7 @@ namespace HomePort.Test.Services
             });
             request.Headers.Add("Host", "localhost");
 
-            var response = await client.SendAsync(request, HttpCompletionOption.ResponseContentRead);
-            
+            var response = await client.SendAsync(request, HttpCompletionOption.ResponseContentRead);            
         }
     }
 }

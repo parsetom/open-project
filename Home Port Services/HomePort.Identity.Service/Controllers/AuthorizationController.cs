@@ -94,27 +94,15 @@ namespace HomePort.Identity.Service.Controllers
             switch (claim.Type)
             {
                 case Claims.Name:
-                    yield return Destinations.AccessToken;
-
-                    if (principal.HasScope(Scopes.Profile))
-                        yield return Destinations.IdentityToken;
-
+                    yield return Destinations.IdentityToken;
                     yield break;
 
                 case Claims.Email:
-                    yield return Destinations.AccessToken;
-
-                    if (principal.HasScope(Scopes.Email))
-                        yield return Destinations.IdentityToken;
-
+                    yield return Destinations.IdentityToken;
                     yield break;
 
                 case Claims.Role:
-                    yield return Destinations.AccessToken;
-
-                    if (principal.HasScope(Scopes.Roles))
-                        yield return Destinations.IdentityToken;
-
+                    yield return Destinations.IdentityToken;
                     yield break;
 
                 // Never include the security stamp in the access and identity tokens, as it's a secret value.

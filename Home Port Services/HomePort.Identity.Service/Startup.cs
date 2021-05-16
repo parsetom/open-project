@@ -101,7 +101,6 @@ namespace HomePort.Identity.Service
                     // Register the ASP.NET Core host.
                     options.UseAspNetCore();
                 });
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -118,7 +117,7 @@ namespace HomePort.Identity.Service
 
             app.UseAuthentication();
             app.UseAuthorization();
-            
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
